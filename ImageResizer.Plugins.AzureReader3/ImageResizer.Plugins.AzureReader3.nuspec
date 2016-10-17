@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
 	<metadata>
-		<id>ImageResizer.Plugins.AzureReader3</id>
+		<id>Gibe.ImageResizer.Plugins.AzureReader3</id>
 		<version>$version$</version>
 		<authors>Gibe Digital Ltd</authors>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -15,6 +15,6 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="bin\Release\ImageResizer.Plugins.AzureReader3.dll" target="lib" />
+		<file src="bin\Release\Gibe.ImageResizer.Plugins.AzureReader3.dll" target="lib" />
 	</files>
 </package>
