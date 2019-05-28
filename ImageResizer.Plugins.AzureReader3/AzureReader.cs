@@ -16,12 +16,14 @@ namespace ImageResizer.Plugins.AzureReader3 {
         AzureVirtualPathProvider vpp = null;
         string blobStorageConnection;
         string blobStorageEndpoint;
+        bool redirectToBlobIfUnmodified;
         string vPath;
         bool lazyExistenceCheck = false;
 
         public AzureReader3Plugin(NameValueCollection args) {
             blobStorageConnection = args["connectionstring"];
             blobStorageEndpoint = args["blobstorageendpoint"];
+            redirectToBlobIfUnmodified = Utils.getBool(args, "redirectToBlobIfUnmodified", true);
             if (string.IsNullOrEmpty(blobStorageEndpoint)) blobStorageEndpoint = args["endpoint"];
             vPath = args["prefix"];
             lazyExistenceCheck = Utils.getBool(args, "lazyExistenceCheck", lazyExistenceCheck);
@@ -103,7 +105,7 @@ namespace ImageResizer.Plugins.AzureReader3 {
             string prefix = vpp.VirtualFilesystemPrefix;
 
             // Check if prefix is within virtual file system and if there is no querystring
-            if (e.VirtualPath.StartsWith(prefix, StringComparison.OrdinalIgnoreCase) && e.QueryString.Count == 0) {
+            if (redirectToBlobIfUnmodified && e.VirtualPath.StartsWith(prefix, StringComparison.OrdinalIgnoreCase) && e.QueryString.Count == 0) {
 
                 // Strip prefix from virtual path; keep container and blob
                 string relativeBlobURL = e.VirtualPath.Substring(prefix.Length).TrimStart('/', '\\');
